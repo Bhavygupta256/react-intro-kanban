@@ -1,16 +1,12 @@
 import './App.css'
-import Taskcard from './components/task-card'
-import {Task} from './utils/data-tasks'  
+import Taskcard from './components/TaskCard'
+import {tasks} from './utils/data-tasks'  
 
 function App() {
-   const task: Task = {
-    title: 'Do Market Research',
-    id: 'BUS-1',
-   points: 5
-   }
+   
   return (
     <>
-    <Taskcard task={task} />
+    {tasks.map((task) => <Taskcard task= {task}/>)}
     </>
   )
 }
