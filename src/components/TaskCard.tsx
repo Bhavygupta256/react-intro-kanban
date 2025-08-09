@@ -27,21 +27,24 @@ const Taskcard = ({ task, updateTask }: {
     const nextIndex = direction === 'up' ? index + 1 : index - 1
     const newPoints = fib[nextIndex]
     if (newPoints) {
-      updateTask({...task, points: newPoints})
+      updateTask({ ...task, points: newPoints })
     }
-
-
   }
 
-  return <div className=" border rounded-lg px-2 m-2 bg-gray-50 w-60">
+  return <div
+    draggable
+    onDragStart={(e) => {
+      e.dataTransfer.setData("id", task.id)
+    }}
+    className="border rounded-lg px-2 m-2 bg-gray-50 w-60">
     <div className="text-base font-base py-2">
       {isEditingTitle ? (
         <input
-        autoFocus
-        className='w-full'
-        onBlur = {() => setIsEditingTitle(false)}
-        value = {task.title}
-        onChange={(e) => updateTask({...task,title: e.target.value })}
+          autoFocus
+          className='w-full'
+          onBlur={() => setIsEditingTitle(false)}
+          value={task.title}
+          onChange={(e) => updateTask({ ...task, title: e.target.value })}
         />
       ) : (
         <div onClick={() => setIsEditingTitle(true)}>
